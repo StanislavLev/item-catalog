@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+car details
+{% endblock %}
+
+{% block button %}
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+            <a href="/"  class="btn btn-primary pull-right">Main page</a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+        {% if user == "guest" %}
+            <a href="/login"  class="btn btn-primary pull-left">Login</a>
+        {% else %}
+            <form action="/gdisconnect">
+                <input class="btn btn-primary pull-left" type="submit" value="Logout">
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row  margin-top10 valign_top">
+                <div class="col-md-7 col-sm-7 col-xs-7">
+                    <img src="{{ url_for('static', filename=car.picture) }}" alt="Car picture" width=100%>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5">
+                    <div class="text-center">
+                        {% if car.newCar %}
+                            <h2 class="new-bgnd">New</h2>
+                        {% else %}
+                            <h2 class="pre-owned-bgnd">Pre-owned</h2>
+                        {% endif %}
+                    </div>
+                    <h2 class="display-inline">{{car.year}}</h2><h3 class="display-inline"> {{car.make|capitalize}} {{car.model|upper}} {{car.trim|upper}}</h3>
+                    <h3>Type: {{car.type}}</h3>
+                    <h3>Mileage: {{car.mileage}}</h3>
+                    <h3>Price: {{car.price}}</h3>
+                    <br>
+                    <h2>Description and contact details:</h2>
+                    <h3>{{car.description}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>  
+    {% if user == dealerName %}
+        <div class="row text-center">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <form class="display-inline" action="../car_{{car.id}}/edit">
+                    <input class="btn btn-default" type="submit" value="Edit car">
+                </form>
+                <form class="display-inline" action="../car_{{car.id}}/delete">
+                    <input class="btn btn-danger" type="submit" value="Delete car">
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

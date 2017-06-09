@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block button %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+            {% if user == "guest" %}
+                <a href="/login"  class="btn btn-primary">Login</a>
+            {% else %}
+                <form action="/gdisconnect">
+                    <input class="btn btn-primary" type="submit" value="Logout">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row valign_top">
+        <form method="post">
+            <input class="hidden" type="submit" name="hiddenSubmit" value="hiddenSubmit"> <!--for press enter, otherwise "Show all/my car" pressed as first submit button in the form-->
+            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                {% if user != "guest" %}
+                    <div>
+                    <!--form class="display-inline" action="/new">
+                        <input class="btn btn-default font-size-22" type="submit" value="Add a new car">
+                    </form-->
+                        <a href="/new" class="btn btn-default font-size-22">Add a new car</a>
+                    <!--form class="display-inline" id="searchForm" method="post"-->
+                        <input type="hidden" value="{{myCars}}" name="myCarsPrev">
+                        <input class="btn btn-default font-size-22" type="submit" name="myCars" value="{{myCars}}">
+                    <!--/form-->
+                    </div>
+                {% endif %}
+                <div class="search-bgnd margin-top10">
+ 
+                    <u><h2>Search requirements:</h2></u>
+                    {% for key in sortedStrKeys %}
+                        <select name="{{key}}" class="width100 font-size-22 margin-top10" onchange="this.form.submit()">
+                            {% for word in carsStrDict[key] %}
+                                {% if word==carsSelectedDict[key] %}
+                                    <option value="{{word}}" selected>{{word}}</option>
+                                {% else %}
+                                    <option value="{{word}}">{{word}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    {% endfor %}
+                    {% for key in sortedIntKeys %}
+                        <h3 class="margin-top10 text-center display-block">{{key|capitalize}}:</h3>
+                        <div class="display-block">
+                            <label class="font-size-22 margin-top10" for="{{key}}From-id">From:</label>
+                            <input class="pull-right" name="{{key}}From" id="{{key}}From-id" value="{{carsIntDict[key][0]}}" >
+                        </div>
+                        <div class="display-block">
+                            <label class="font-size-22 margin-top10" for="{{key}}To-id">To:</label>
+                            <input class="pull-right" name="{{key}}To" id="{{key}}To-id" value="{{carsIntDict[key][1]}}" >
+                        </div>
+                    {% endfor %}
+                    <input class = "btn btn-wide btn-basic font-size-22" type="submit" value="Search">
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-8">        
+                {% for car in allCars %}
+                    <div class="row  margin-top10 valign_top row-eq-height">
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                            <img class="max-height400px" src="{{ url_for('static', filename=car.picture) }}" alt="Car picture" width=100%>
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="text-center">
+                                {% if car.newCar %}
+                                    <h2 class="new-bgnd">New</h2>
+                                {% else %}
+                                    <h2 class="pre-owned-bgnd">Pre-owned</h2>
+                                {% endif %}
+                            </div>
+                            <h2 class="display-inline">{{car.year}}</h2><h3 class="display-inline"> {{car.make|capitalize}} {{car.model|upper}} {{car.trim|upper}}</h3>
+                            <h3>Type: {{car.type}}</h3>
+                            <h3>Mileage: {{car.mileage}}</h3>
+                            <h3>Price: {{car.price}}</h3>
+                            <a href="/car_{{car.id}}"  class="btn btn-info">More details...</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                <!--a href="/page_prev">&lt&ltPrevious Page&lt&lt</a-->
+
+                    <input class="btn-wide btn-link font-size-22 font-black padding-zero margin-zero text-right" type="submit" name="prevPage" value="&lt&lt Previous Page &lt&lt" {{prevPageDisabled}}>
+                    <input class="font-size-22 width10 text-center" name="pageNum" value="{{pageNum}}">
+                    <input class="btn-wide btn-link font-size-22 font-black padding-zero margin-zero text-left" type="submit" name="nextPage" value="&gt&gt Next Page &gt&gt" {{nextPageDisabled}}>
+
+                <!--a href="/page_next">&gt&gt&gtNext Page&gt&gt</a-->
+                <!--a href="/page_next">&gt&gt&gtNext Page&gt&gt</a-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+{% endblock %}

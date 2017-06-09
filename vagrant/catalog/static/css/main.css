@@ -1,0 +1,146 @@
+
+* {
+  font-family: 'Alegreya', serif;
+  font-size: 18px;
+  color: black;
+  word-wrap: normal;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+body {
+    background-image: url("../img/cars.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 5px;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+hr {
+    border-top: 3px solid #7d97ad;
+}
+
+.font-black {
+    color: black;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.container-fluid {
+  margin-top: 20px;  
+  max-width: 1200px;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+}
+
+.padding-zero {
+  padding: 0;
+}
+
+.margin-zero {
+  margin: 0;
+}
+
+.margin-top10 {
+  margin-top: 10px;
+}
+
+.bgnd {
+  -webkit-box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.8);
+  -moz-box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.8);
+  background: rgb(255,255,255);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.search-bgnd {
+  background: rgb(72,61,139);
+  background: rgba(72,61,139, 0.3);
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(62,51,129);
+}
+
+.new-bgnd {
+  background: rgb(255,215,0);
+  background: rgba(255,215,0, 0.3);
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(235,195,0);
+}
+
+.pre-owned-bgnd {
+  background: rgb(192,192,192);
+  background: rgba(192,192,192, 0.3);
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(192,192,192);
+}
+
+.width100 {
+  width: 100%;
+}
+
+.width10 {
+  width: 10%;
+}
+
+.max-height400px {
+  max-height: 400px;
+}
+
+.height200{
+  height: 200px;
+}
+
+.muted-text {
+    color: grey;
+}
+
+.btn {
+  width: 150px;
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+.btn-wide {
+  margin-top: 5px;
+  width: 200px;
+}
+
+.valign_top{
+    align-items: flex-start;
+}
+
+.font-size-22{
+    font-size: 22px;
+}

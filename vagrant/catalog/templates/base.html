@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/myfunc.js') }}" defer></script>
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+        <!--normalize.css in bootstrap" -->
+        <link href="https://fonts.googleapis.com/css?family=Alegreya:400,700,900" rel="stylesheet">
+        {% block header %} {% endblock %}
+    </head>
+    <body onload="timedText()">
+        <div class="container-fluid bgnd">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3 class="text-center" id="flashtxt">{{message}}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-8 text-center">
+                    <h1>Welcome {{user}}</h1>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 padding-zero">
+                    {% block button %} {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <hr>
+                </div>
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

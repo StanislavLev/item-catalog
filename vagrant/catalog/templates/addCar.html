@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block button %}
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+            <a href="/"  class="btn btn-primary pull-right">Main page</a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+            <form action="/gdisconnect">
+                <input class="btn btn-primary pull-left" type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <input type="radio" required name="newCar" value="True" id="newCarRadio-id" {{inputs['newCarRadio']}}>
+                <label for="newCarRadio-id"> New car / </label>
+                <input type="radio" required name="newCar" value="False" id="pre-ownedRadio-id" {{inputs['pre-ownedCarRadio']}}> 
+                <label for="pre-ownedRadio-id"> Pre-owned car </label>
+            </div>
+        </div>
+        {% for key in orderedInputs %}
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <label class="display-block" for="{{key}}-id">{{key|capitalize}}:</label>
+                <input class="muted-text display-block width100" type="text" required name="{{key}}" id="{{key}}-id" onfocus="clearDefaultTextOnfocus(this.id, '{{inputs[key]}}')" onblur="setDefaultTextOnblur(this.id, '{{inputs[key]}}')" value="{{inputs[key]}}">
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <h3>Chose you car picture or stay with this cool one:</h3>
+                <img src="{{ url_for('static', filename=carPicture) }}" alt="Car picture" width=100%>
+            </div>
+        </div>
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <label class="display-block" for="picture-id">Change car picture:</label>
+                <input type="file" name="picture" id="picture-id "accept="image/*">
+            </div>
+        </div>
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <label class="display-block" for="description-id">Description and contact details:</label>
+                <textarea class="muted-text display-block width100 height200" required name="description" id="description-id">{{inputs['description']}}</textarea> 
+            </div>
+        </div>
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 text-center">
+                <input class = "btn btn-wide btn-info" type="submit" value="{{title}}">
+                {% if title == "Edit car" %}
+                    <a class="btn btn-wide btn-default" href="/car_{{inputs['ID']}}">Back to car page</a>
+                {% endif %}
+            </div>
+        </div>  
+    </form>
+    
+{% endblock %}

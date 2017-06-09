@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Delete car
+{% endblock %}
+
+{% block button %}
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+            <a href="/"  class="btn btn-primary pull-right">Main page</a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+            <form action="/gdisconnect">
+                <input class="btn btn-primary pull-left" type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Are you sure you want to permanently delete this car?</h2>
+        </div>
+    </div>
+    <div class="row  margin-top10 valign_top">
+        <div class="col-md-7 col-sm-7 col-xs-7">
+            <img src="{{ url_for('static', filename=deleteCar.picture) }}" alt="Car picture" width=100%>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-5">
+            <div class="text-center">
+                {% if deleteCar.newCar %}
+                    <h2 class="new-bgnd">New</h2>
+                {% else %}
+                    <h2 class="pre-owned-bgnd">Pre-owned</h2>
+                {% endif %}
+            </div>
+            <h2 class="display-inline">{{deleteCar.year}}</h2><h3 class="display-inline"> {{deleteCar.make|capitalize}} {{deleteCar.model|upper}} {{deleteCar.trim|upper}}</h3>
+            <h3>Type: {{deleteCar.type}}</h3>
+            <h3>Mileage: {{deleteCar.mileage}}</h3>
+            <h3>Price: {{deleteCar.price}}</h3>
+            <h3>Created: {{deleteCar.created}}</h3>
+        </div>
+    </div>
+    <form method="post">
+        <div class="row margin-top10">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 text-center">
+                <input class = "btn btn-wide btn-danger" type="submit" value="Delete car">
+                <a class="btn btn-wide btn-default" href="/car_{{deleteCar.id}}">Back to car page</a>
+            </div>
+        </div>  
+    </form>
+{% endblock %}
