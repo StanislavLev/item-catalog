@@ -2,7 +2,7 @@
 
 This is car sell/buy site, where any registered user can create post about car sale.
 Users can edit and delete their own posts.
-Implemented a third-party authentication & authorization service: login with there Google+ account. 
+Implemented a third-party authentication & authorization service: login with their Google+ account. 
 
 ## Installation
 
