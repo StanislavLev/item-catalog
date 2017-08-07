@@ -3,6 +3,8 @@
 This is car sell/buy site, where any registered user can create post about car sale.
 Users can edit and delete their own posts.
 Implemented a third-party authentication & authorization service: login with their Google+ account. 
+Hosted on AWS: http://ec2-52-25-235-182.us-west-2.compute.amazonaws.com
+The next session discribe how to run it on local host.
 
 ## Installation
 
